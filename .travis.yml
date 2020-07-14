@@ -13,5 +13,11 @@ after_success:
    - docker build -t sokolovs/multi-nginx ./nginx
    - docker build -t sokolovs/multi-server ./server
    - docker build -t sokolovs/multi-worker ./worker
+ 
+   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" -- password-stdin
 
+   - docker push sokolovs/multi-client
+   - docker push sokolovs/multi-nginx
+   - docker push sokolovs/multi-server
+   - docker push sokolovs/multi-worker
 
