@@ -6,7 +6,7 @@ before_install:
     - docker build -t sokolovs/multi-container -f ./client/Dockerfile.dev ./client
 
 script:
-   - docker run -e CI=true sokolovs/react-test npm test
+   - docker run -e CI=true sokolovs/multi-container npm test
 
 after_success:
    - docker build -t sokolovs/multi-client ./client
