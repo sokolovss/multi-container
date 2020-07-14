@@ -3,7 +3,7 @@ services:
     - docker
 
 before_install:
-    - docker build -t sokolovs/multi-container -f ./client/Dockerfile.dev ./client
+    - docker build -t sokolovs/multi-client -f ./client/Dockerfile.dev ./client
 
 script:
    - docker run -e CI=true sokolovs/multi-container npm test
@@ -14,7 +14,7 @@ after_success:
    - docker build -t sokolovs/multi-server ./server
    - docker build -t sokolovs/multi-worker ./worker
  
-   - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
    - docker push sokolovs/multi-client
    - docker push sokolovs/multi-nginx
